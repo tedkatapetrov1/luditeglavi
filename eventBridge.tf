@@ -7,10 +7,6 @@ resource "aws_cloudwatch_event_rule" "daily_trigger" {
   tags = {
     Name = "daily_trigger_rule"
   }
-  targets {
-    arn     = aws_codebuild_project.my_codebuild_project.arn
-    role_arn = aws_iam_role.eventbridge_codebuild_role.arn
-  }
 }
 
 resource "aws_cloudwatch_event_target" "sns" {
