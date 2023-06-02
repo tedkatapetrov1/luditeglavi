@@ -15,12 +15,3 @@ resource "aws_cloudwatch_event_target" "sns" {
   target_id = "InvokeCodeBuild"
   role_arn = aws_iam_role.eventbridge_codebuild_role.arn
 }
-
-resource "aws_sns_topic" "aws_logins" {
-  name = "aws-dailytriggers-logins"
-}
-
-resource "aws_sns_topic_policy" "default" {
-  arn    = aws_sns_topic.aws_logins.arn
-  policy = data.aws_iam_policy_document.sns_topic_policy.json
-}
