@@ -11,8 +11,9 @@ resource "aws_cloudwatch_event_rule" "daily_trigger" {
 
 resource "aws_cloudwatch_event_target" "sns" {
   rule      = aws_cloudwatch_event_rule.daily_trigger.name
-  arn       = aws_sns_topic.aws_logins.arn
-  target_id = "SendToSNS"
+  arn       = aws_codebuild_project.my_codebuild_project.arn
+  target_id = "InvokeCodeBuild"
+  role_arn = aws_iam_role.eventbridge_codebuild_role.arn
 }
 
 resource "aws_sns_topic" "aws_logins" {
