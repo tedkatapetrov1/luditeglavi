@@ -44,7 +44,7 @@ resource "aws_iam_role_policy_attachment" "eventbridge_codebuild_attachment" {
 }
 
 resource "aws_iam_role" "codebuilder_role" {
-  name = "codebuilder_role"
+  name = "codebuilder-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -63,6 +63,7 @@ resource "aws_iam_role" "codebuilder_role" {
     tag-key = "tag-value"
   }
 }
+
 resource "aws_iam_role_policy_attachment" "codebuild_attachment" {
   role       = aws_iam_role.codebuilder_role.id
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
