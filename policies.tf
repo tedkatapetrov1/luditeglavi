@@ -42,7 +42,28 @@ resource "aws_iam_role_policy_attachment" "eventbridge_codebuild_attachment" {
   role       = aws_iam_role.eventbridge_codebuild_role.name
   policy_arn = aws_iam_policy.eventbridge_codebuild_policy.arn
 }
+
+resource "aws_iam_role" "codebuilder_role" {
+  name = "codebuilder_role"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+
+  tags = {
+    tag-key = "tag-value"
+  }
+}
 resource "aws_iam_role_policy_attachment" "codebuild_attachment" {
-  role       = aws_iam_role.eventbridge_codebuild_role.id
+  role       = aws_iam_role.codebuilder_role.id
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
