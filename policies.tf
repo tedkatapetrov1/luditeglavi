@@ -42,3 +42,7 @@ resource "aws_iam_role_policy_attachment" "eventbridge_codebuild_attachment" {
   role       = aws_iam_role.eventbridge_codebuild_role.name
   policy_arn = aws_iam_policy.eventbridge_codebuild_policy.arn
 }
+resource "aws_iam_role_policy_attachment" "codebuild_attachment" {
+  role       = aws_iam_role.eventbridge_codebuild_role.id
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
