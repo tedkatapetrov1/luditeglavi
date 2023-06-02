@@ -1,7 +1,7 @@
 resource "aws_codebuild_project" "my_codebuild_project" {
   name         = "my-codebuild-project"
   description  = "my-codebuild-project"
-  service_role = aws_iam_role.codebuilder_role.id
+  service_role = aws_iam_role.codebuilder_role.arn
 
   artifacts {
     type = "NO_ARTIFACTS"
